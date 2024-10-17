@@ -4,7 +4,10 @@ import json
 from PyQt5 import QtWidgets, QtGui
 
 pygame.init()
+pygame.mixer.init()
 
+pygame.mixer.music.load("Pacman Theme.mp3")
+pygame.mixer.music.play(loops=-1)
 # Inicializar joystick
 pygame.joystick.init()
 
