@@ -58,6 +58,7 @@ puntos = [[1 if laberinto[fila][columna] == 0 else 0 for columna in range(len(la
 x_pacman = TAM_BLOQUE + TAM_BLOQUE // 2
 y_pacman = TAM_BLOQUE + TAM_BLOQUE // 2
 velocidad = 5
+velocidad_fantasma = 1
 radio_pacman = 15
 
 # Contador de puntos
@@ -72,11 +73,11 @@ fuente = pygame.font.Font(None, 36)
 
 # Clase para los fantasmas
 class Fantasma:
-    def __init__(self, x, y, color, velocidad):
+    def __init__(self, x, y, color, velocidad_fantasma):
         self.x = x
         self.y = y
         self.color = color
-        self.velocidad = velocidad
+        self.velocidad = velocidad_fantasma
         self.radio = 15
 
     def mover(self, pacman_x, pacman_y):
@@ -137,9 +138,24 @@ def dibujar_pacman(x, y):
 def colision_laberinto(x, y):
     columna = int(x) // TAM_BLOQUE
     fila = int(y) // TAM_BLOQUE
+    
+    # Verificar límites de la matriz
     if fila < 0 or fila >= len(laberinto) or columna < 0 or columna >= len(laberinto[0]):
+        return True  # Colisión con los límites de la matriz
+
+    # Comprobar colisiones considerando el radio de Pacman
+    if laberinto[fila][columna] == 1:  # Colisión con muro
         return True
-    return laberinto[fila][columna] == 1
+
+    # Comprobar la celda a la derecha
+    if laberinto[fila][columna + 1] == 1 and (x + radio_pacman) // TAM_BLOQUE == columna + 1:
+        return True
+
+    # Comprobar la celda abajo
+    if laberinto[fila + 1][columna] == 1 and (y + radio_pacman) // TAM_BLOQUE == fila + 1:
+        return True
+
+    return False
 
 # Función para comprobar la colisión con puntos
 def colision_punto(x, y):
@@ -324,11 +340,16 @@ while True:
         nueva_x_pacman = x_pacman + direccion_x
         nueva_y_pacman = y_pacman + direccion_y
 
+        # Comprobar colisiones con el laberinto antes de mover
         if not colision_laberinto(nueva_x_pacman - radio_pacman, y_pacman):
             x_pacman = nueva_x_pacman
         if not colision_laberinto(x_pacman, nueva_y_pacman - radio_pacman):
             y_pacman = nueva_y_pacman
-
+        if not colision_laberinto(x_pacman, nueva_y_pacman):
+            y_pacman = nueva_y_pacman
+        if not colision_laberinto(x_pacman - radio_pacman, nueva_y_pacman - radio_pacman):
+            y_pacman = nueva_y_pacman
+        
         colision_punto(x_pacman, y_pacman)
 
         # Mover y dibujar fantasmas
