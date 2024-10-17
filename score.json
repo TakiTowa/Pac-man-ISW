@@ -1,0 +1,52 @@
+{
+    "scores": [
+        {
+            "name": "m",
+            "score": 0
+        },
+        {
+            "name": "j",
+            "score": 1
+        },
+        {
+            "name": "juan",
+            "score": 6
+        },
+        {
+            "name": "carlos",
+            "score": 3
+        },
+        {
+            "name": "pedro",
+            "score": 12
+        },
+        {
+            "name": "luis",
+            "score": 7
+        },
+        {
+            "name": "Zara",
+            "score": 11
+        },
+        {
+            "name": "Gael",
+            "score": 44
+        },
+        {
+            "name": "Ram\u00f3n",
+            "score": 23
+        },
+        {
+            "name": "mahatma",
+            "score": 30
+        },
+        {
+            "name": "dante",
+            "score": 19
+        },
+        {
+            "name": "oscar",
+            "score": 35
+        }
+    ]
+}
