@@ -240,7 +240,7 @@ def reiniciar_juego():
 
 # Botón de reinicio
 def dibujar_boton_reinicio():
-    boton_rect = pygame.Rect(ANCHO_VENTANA // 2 + 140, ALTO_VENTANA // 2 + 50, 100, 40)
+    boton_rect = pygame.Rect(ANCHO_VENTANA // 2 + 140, ALTO_VENTANA // 2 + 50, 130, 40)
     pygame.draw.rect(ventana, ROSADO, boton_rect)
     texto_boton = fuente.render("Reiniciar", True, NEGRO)
     ventana.blit(texto_boton, (boton_rect.x + 10, boton_rect.y + 5))
@@ -272,7 +272,7 @@ while True:
             if evento.type == pygame.MOUSEBUTTONDOWN:
                 if evento.button == 1:  # Botón izquierdo del ratón
                     mouse_pos = pygame.mouse.get_pos()
-                    boton_rect = pygame.Rect(ANCHO_VENTANA // 2 - 50, ALTO_VENTANA // 2 + 50, 100, 40)
+                    boton_rect = pygame.Rect(ANCHO_VENTANA // 2 + 140, ALTO_VENTANA // 2 + 50, 130, 40)
                     if boton_rect.collidepoint(mouse_pos):
                         reiniciar_juego()
             
@@ -394,3 +394,4 @@ while True:
     # Actualizar pantalla
     pygame.display.flip()
     reloj.tick(30)
+
