@@ -2,11 +2,13 @@ import pygame
 import sys
 import json
 from PyQt5 import QtWidgets, QtGui
+import time
 
 pygame.init()
 pygame.mixer.init()
+pygame.mixer.music.load("FieldsOfHopesAndDreams.mp3")
 
-pygame.mixer.music.load("Pacman Theme.mp3")
+
 pygame.mixer.music.play(loops=-1)
 # Inicializar joystick
 pygame.joystick.init()
@@ -46,10 +48,10 @@ laberinto = [
     [1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1],
     [1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1],
-    [1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1],
-    [1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1],
+    [1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
+    [1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+    [1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
@@ -114,9 +116,9 @@ class Fantasma:
 
 # Inicializar fantasmas con diferentes colores y posiciones
 fantasmas = [
-    Fantasma(TAM_BLOQUE * 13 + TAM_BLOQUE // 2, TAM_BLOQUE * 3 + TAM_BLOQUE // 2, ROJO, 3),
-    Fantasma(TAM_BLOQUE * 13 + TAM_BLOQUE // 2, TAM_BLOQUE * 6 + TAM_BLOQUE // 2, ROSADO, 2),
-    Fantasma(TAM_BLOQUE * 13 + TAM_BLOQUE // 2, TAM_BLOQUE * 5 + TAM_BLOQUE // 2, CIAN, 2.5)
+    Fantasma(TAM_BLOQUE * 13 + TAM_BLOQUE // 2, TAM_BLOQUE * 4 + TAM_BLOQUE // 2, ROJO, 3),
+    Fantasma(TAM_BLOQUE * 13 + TAM_BLOQUE // 2, TAM_BLOQUE * 5 + TAM_BLOQUE // 2, ROSADO, 2),
+    Fantasma(TAM_BLOQUE * 13 + TAM_BLOQUE // 2, TAM_BLOQUE * 6 + TAM_BLOQUE // 2, CIAN, 1.5)
 ]
 
 # Función para dibujar el laberinto
@@ -258,7 +260,6 @@ if pygame.joystick.get_count() > 0:
     joystick = pygame.joystick.Joystick(0)
     joystick.init()
 
-
 while True:
     # Manejar eventos
     for evento in pygame.event.get():
@@ -378,6 +379,11 @@ while True:
             fantasma.dibujar(ventana)
     else:
         dibujar_boton_reinicio()
+        fantasmas = [
+        Fantasma(TAM_BLOQUE * 13 + TAM_BLOQUE // 2, TAM_BLOQUE * 3 + TAM_BLOQUE // 2, ROJO, 3),
+        Fantasma(TAM_BLOQUE * 13 + TAM_BLOQUE // 2, TAM_BLOQUE * 6 + TAM_BLOQUE // 2, ROSADO, 2),
+        Fantasma(TAM_BLOQUE * 13 + TAM_BLOQUE // 2, TAM_BLOQUE * 5 + TAM_BLOQUE // 2, CIAN, 2.5)
+        ]
         # Mostrar las puntuaciones más altas
         scores = get_high_scores()
         show_scores(scores)
